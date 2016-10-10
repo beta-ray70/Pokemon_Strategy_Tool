@@ -5,7 +5,7 @@
 #ifndef POKEMON_STRATEGY_TOOLS_NATURETYPE_H
 #define POKEMON_STRATEGY_TOOLS_NATURETYPE_H
 
-#include "LinkedList.h"
+#include <LinkedList.h>
 
 typedef enum {
     PSYCHIC,

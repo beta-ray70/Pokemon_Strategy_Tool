@@ -4,11 +4,12 @@
  * @brief source file to create function allow us to make type, calculate weakness, resistance and immunity
  */
 
-#include "../include/LinkedList.h"
-#include "../include/Pokémon.h"
-#include "../include/NatureType.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <LinkedList.h>
+#include <Pokemon.h>
+#include <NatureType.h>
+
 
 /**
  *

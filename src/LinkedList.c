@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../include/LinkedList.h"
+#include <LinkedList.h>
 
 /**
  * @brief construct a linkedList

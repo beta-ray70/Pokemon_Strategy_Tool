@@ -8,11 +8,11 @@
  * @brief this is the main of the programm
  */
 
-#include "../include/LinkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/NatureType.h"
-#include "../include/Pokémon.h"
+#include <LinkedList.h>
+#include <NatureType.h>
+#include <Pokemon.h>
 
 int main (int argc, char* argv[], int* arge[]){
     int value = 5, i, value1 = 7, value2 = 9;

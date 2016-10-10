@@ -5,7 +5,7 @@
 #ifndef POKEMON_STRATEGY_TOOLS_POKÉMON_H
 #define POKEMON_STRATEGY_TOOLS_POKÉMON_H
 
-#include "NatureType.h"
+#include <NatureType.h>
 
 #define NBTYPE 18
 #define NB_POKEMON 6

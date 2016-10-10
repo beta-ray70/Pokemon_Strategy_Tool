@@ -9,8 +9,8 @@
  */
 
 #include <stddef.h>
-#include "../include/LinkedList.h"
-#include "../include/Pokémon.h"
+#include <LinkedList.h>
+#include <Pokemon.h>
 
 /**
  * @brief WARNING SIDE EFFECT : creation of the weaknessX2 in the same times as weakness

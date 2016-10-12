@@ -25,7 +25,7 @@ LinkedList* weaknessPokemon(Pokemon* pokemon){
         }
         tmp = tmp->next;
     }
-    if (pokemon->type[1].typePokemon != NULL) {
+    if (pokemon->type[1].typePokemon != UNDEFINED) {
         tmp = pokemon->type[1].weakness->head;
         while (tmp != NULL) {
             if (!contains(tmp->value, pokemon->immunity) && !contains(tmp->value, pokemon->resistance) && !contains(tmp->value, pokemon->resistanceX2)) {
@@ -62,7 +62,7 @@ LinkedList* weaknessTeamCalculator(PokemonTeam* team){
  */
 LinkedList* immunityPokemon(Pokemon* pokemon){
     concatenationLinkedList(pokemon->immunity, pokemon->type[0].immunity);
-    if (pokemon->type[1].typePokemon != NULL){
+    if (pokemon->type[1].typePokemon != UNDEFINED){
         Element* element = pokemon->type[1].immunity->head;
         while (element != NULL ){
             if (!contains(element->value, pokemon->immunity)){
@@ -100,7 +100,7 @@ LinkedList* resistancePokemon(Pokemon* pokemon){
         element = element->next;
     }
 
-    if (pokemon->type[1].typePokemon != NULL) {
+    if (pokemon->type[1].typePokemon != UNDEFINED) {
         element = pokemon->type[1].resistance->head;
         while (element!=NULL){
             if (!contains(element->value, pokemon->immunity)){

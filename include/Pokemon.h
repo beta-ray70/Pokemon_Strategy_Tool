@@ -2,8 +2,8 @@
 // Created by Julien Barbier on 24/09/2016.
 //
 
-#ifndef POKEMON_STRATEGY_TOOLS_POKÉMON_H
-#define POKEMON_STRATEGY_TOOLS_POKÉMON_H
+#ifndef POKEMON_STRATEGY_TOOLS_POKEMON_H
+#define POKEMON_STRATEGY_TOOLS_POKEMON_H
 
 #include <NatureType.h>
 

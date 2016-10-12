@@ -25,7 +25,8 @@ typedef enum {
     STEEL,
     FAIRY,
     NORMAL,
-    FLYING
+    FLYING,
+    UNDEFINED
 } TypePokemon;
 
 typedef struct {
@@ -40,7 +41,7 @@ typedef struct {
  * @param type the Pokemon type we want to create
  * @return the linkedList of weakness
  */
-NatureType* typeCreator(NatureType* type);
+NatureType* typeInitialisation(NatureType* type);
 
 /**
  * @brief f***ing borring function (array -> code line)

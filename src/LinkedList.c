@@ -36,8 +36,8 @@ LinkedList* createLinkedList(){
 
 int isEmpty(LinkedList* list){
     if (list->size == 0)
-        return TRUE;
-    else return FALSE;
+        return true;
+    else return false;
 }
 
 /**
@@ -227,7 +227,7 @@ void deleteLinkedList(LinkedList* list){
  */
 bool contains (void* value, LinkedList* list){
     if (isEmpty(list)){
-        return FALSE;
+        return false;
     } else {
         Element* tmp = list->head;
         while (tmp->value != value && tmp->next != NULL){
@@ -235,9 +235,9 @@ bool contains (void* value, LinkedList* list){
         }
 
         if (tmp->next == NULL){
-            return FALSE;
+            return false;
         } else {
-            return TRUE;
+            return true;
         }
     }
 }

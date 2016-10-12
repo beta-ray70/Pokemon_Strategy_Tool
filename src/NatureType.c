@@ -16,7 +16,7 @@
  * @param type the Pokemon type we want to create
  * @return the linkedList of weakness
  */
-NatureType* typeCreator(NatureType* type){
+NatureType* typeInitialisation(NatureType* type){
     LinkedList* weakness = malloc(sizeof(LinkedList));
     LinkedList* resistance = malloc(sizeof(LinkedList));
     LinkedList* immunity = malloc(sizeof(LinkedList));

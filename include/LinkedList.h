@@ -26,6 +26,14 @@ typedef struct {
 LinkedList* createLinkedList();
 
 /**
+ * @brief function in aim to know if a list is empty or not
+ * @param list the list we want to verify if it's empty or not
+ * @return true if it's empty, false else
+ */
+
+int isEmpty(LinkedList* list);
+
+/**
  *
  * @param value the value we want to add in the head of the linked list
  * @param list  the list in which we want to add the value
@@ -51,11 +59,18 @@ LinkedList* addElementInTail (void* value, LinkedList* list);
 LinkedList* addElementInIndex (void* value, LinkedList* list, int index);
 
 /**
+ * @brief remove the first element of a list
+ * @param list the list in which we want to remove the first element
+ * @return the list without the first element
+ */
+LinkedList* removeFirstElement(LinkedList *list);
+
+/**
  *
  * @param list the list we want to remove the last element
  * @return the list without the last element
  */
-LinkedList* removeElementInTail(LinkedList* list);
+LinkedList* removeLastElement(LinkedList *list);
 
 /**
  *
@@ -71,7 +86,7 @@ LinkedList* removeElementInIndex(LinkedList* list, int index);
  * @param list the list in which we want to remove
  * @return the list without the value
  */
-LinkedList* removeByValue(void* value, LinkedList* list);
+LinkedList* removeValue(void *value, LinkedList *list);
 
 /**
  *
@@ -101,7 +116,7 @@ int indexValue(void* value, LinkedList* list);
  * @param list the list in which we want to know the nombre of occurence of the value
  * @return the number of occurence
  */
-int occurence(void* value, LinkedList* list);
+int occurrence(void *value, LinkedList *list);
 
 /**
  *

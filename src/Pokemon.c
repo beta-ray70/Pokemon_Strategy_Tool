@@ -30,7 +30,7 @@ LinkedList* weaknessPokemon(Pokemon* pokemon){
         while (tmp != NULL) {
             if (!contains(tmp->value, pokemon->immunity) && !contains(tmp->value, pokemon->resistance) && !contains(tmp->value, pokemon->resistanceX2)) {
                 if (contains(tmp->value, pokemon->weakness)) {
-                    pokemon->weakness = removeByValue(tmp->value, pokemon->weakness);
+                    pokemon->weakness = removeValue(tmp->value, pokemon->weakness);
                     pokemon->weaknessX2 = addElementInTail(tmp->value, pokemon->weaknessX2);
                 } else {
                     pokemon->weakness = addElementInTail(tmp->value, pokemon->weakness);
@@ -105,7 +105,7 @@ LinkedList* resistancePokemon(Pokemon* pokemon){
         while (element!=NULL){
             if (!contains(element->value, pokemon->immunity)){
                 if (contains(element->value, pokemon->resistance)){
-                    pokemon->resistance = removeByValue(element->value, pokemon->resistance);
+                    pokemon->resistance = removeValue(element->value, pokemon->resistance);
                     pokemon->resistanceX2 = addElementInTail(element->value, pokemon->resistanceX2);
                 } else {
                     pokemon->resistance = addElementInTail(element->value, pokemon->resistance);

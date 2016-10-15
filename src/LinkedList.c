@@ -9,7 +9,6 @@
  * @brief implementation of all the function of the linked list for a futur use in other project
  */
 
-#include <windef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -29,19 +28,17 @@ LinkedList* createLinkedList(){
 }
 
 /**
- *
+ * @brief function in aim to know if a list is empty or not
  * @param list the list we want to verify if it's empty or not
  * @return true if it's empty, false else
  */
 
 int isEmpty(LinkedList* list){
-    if (list->size == 0)
-        return true;
-    else return false;
+    return list == NULL || list->size == 0;
 }
 
 /**
- *
+ * @brief adding an element in head of a list
  * @param value the value we want to add in the head of the linked list
  * @param list  the list in which we want to add the value
  * @return the list with the value added
@@ -50,7 +47,6 @@ LinkedList* addElementInHead (void* value, LinkedList* list){
 
     Element* elem = malloc(sizeof(Element));
 
-    printf ("Entre dans la fonction addElementInHead\n");
     elem->value = value;
     elem->prev = NULL;
     if (isEmpty(list)){
@@ -63,13 +59,11 @@ LinkedList* addElementInHead (void* value, LinkedList* list){
         list->head = elem;
     }
     list->size++;
-    printf("End\n");
-
     return list;
 }
 
 /**
- *
+ * @brief add an element in the tail of a list
  * @param value the value we want to add in the tail of the linked list
  * @param list the list in which we want to add the value
  * @return the list with the elment added
@@ -77,7 +71,6 @@ LinkedList* addElementInHead (void* value, LinkedList* list){
 LinkedList* addElementInTail (void* value, LinkedList* list){
     Element* elem = malloc(sizeof(Element));
 
-    printf ("Entre dans la fonction addElementInTail\n");
     elem->value = value;
     elem->next = NULL;
     if (isEmpty(list)){
@@ -90,13 +83,11 @@ LinkedList* addElementInTail (void* value, LinkedList* list){
         list->tail = elem;
     }
     list->size ++;
-    printf("End\n");
-
     return list;
 }
 
 /**
- *
+ * @brief add an element in a certain index in a list
  * @param value the value we want to add in the list in the index "index"
  * @param list the list in which we want to add the value
  * @param index the index we want to insert the value
@@ -105,7 +96,6 @@ LinkedList* addElementInTail (void* value, LinkedList* list){
 LinkedList* addElementInIndex (void* value, LinkedList* list, int index){
     Element* elem = malloc(sizeof(Element));
 
-    printf("Enter in addElementInIndex\n");
     elem->value = value;
     if (isEmpty(list)){
         elem->next = NULL;
@@ -113,33 +103,36 @@ LinkedList* addElementInIndex (void* value, LinkedList* list, int index){
         list->head = elem;
         list->tail = elem;
         list->size ++;
-        printf("Warning : the list was empty");
+        fprintf(stderr, ">>Warning : the list was empty\n");
     } else {
         if (index > list->size && index < 0)
-            printf("Impossible to add this elem");
+            fprintf(stderr, ">>Impossible to add this elem\n");
         else {
             Element* tmp = list->head;
             int i = 0;
             for (i = 0; i < index; i++){
                 tmp = tmp->next;
             }
+
+            //initialisation of the element
             elem->prev = tmp->prev;
             elem->next = tmp;
+
+            //adding the element in the list
             tmp->prev->next = elem;
             tmp->prev = elem;
             list->size++;
         }
     }
-    printf("End\n");
     return list;
 }
 
 /**
- *
+ * @brief remove the first element of a list
  * @param list the list in which we want to remove the first element
  * @return the list without the first element
  */
-LinkedList* removeElementInHead(LinkedList* list){
+LinkedList* removeFirstElement(LinkedList *list){
     if(!isEmpty(list)){
         if (list->size == 1){
             free(list->head);
@@ -153,17 +146,19 @@ LinkedList* removeElementInHead(LinkedList* list){
             free(tmp);
             list->size--;
         }
+    } else {
+        fprintf(stderr, ">>the list is empty\n");
     }
     return list;
 }
 
 
 /**
- *
+ * @brief remove the last element of a list
  * @param list the list we want to remove the last element
  * @return the list without the last element
  */
-LinkedList* removeElementInTail(LinkedList* list){
+LinkedList* removeLastElement(LinkedList *list){
     if (!isEmpty(list)){
         if (list->size == 1){
             free(list->head);
@@ -182,7 +177,7 @@ LinkedList* removeElementInTail(LinkedList* list){
 }
 
 /**
- *
+ * @brief remove the n element of a list
  * @param list the list in which we want to remove the element in index "index"
  * @param index the index of the element to removed
  * @return the list without the element in index "index"
@@ -208,19 +203,19 @@ LinkedList* removeElementInIndex(LinkedList* list, int index){
 
 
 /**
- *
+ * @brief delete an entire list
  * @param list the list to remove
  */
 void deleteLinkedList(LinkedList* list){
     while (list->size > 0){
-        list = removeElementInHead(list);
+        list = removeFirstElement(list);
     }
     free(list);
 }
 
 
 /**
- *
+ * @brief function verifying that a value is in a list
  * @param value the value we saerch
  * @param list the LinkedList in which we search the value
  * @return true if it contains, false else
@@ -230,23 +225,19 @@ bool contains (void* value, LinkedList* list){
         return false;
     } else {
         Element* tmp = list->head;
-        while (tmp->value != value && tmp->next != NULL){
+        while (tmp != NULL && tmp->value != value){
             tmp = tmp->next;
         }
 
-        if (tmp->next == NULL){
-            return false;
-        } else {
-            return true;
-        }
+        return tmp != NULL;
     }
 }
 
 /**
- *
+ * @brief function that search the value in a list
  * @param value the value we want to find the index
  * @param list the list in which we want the index of the value
- * @return the index of the value in the linked list
+ * @return the index of the value in the linked list (first occurence)
  */
 int indexValue(void* value, LinkedList* list){
     if(contains(value, list)){
@@ -254,7 +245,7 @@ int indexValue(void* value, LinkedList* list){
         int i = 0;
         while(tmp->value != value && tmp->next != NULL){
             tmp = tmp ->next;
-            i++;
+            ++i;
         }
         return i;
     } else {
@@ -263,12 +254,12 @@ int indexValue(void* value, LinkedList* list){
 }
 
 /**
- *
+ * @brief function that count the nomber of time we have a certain value
  * @param value the value we want to know the nomber of occurence present in the list
  * @param list the list in which we want to know the nombre of occurence of the value
  * @return the number of occurence
  */
-int occurence(void* value, LinkedList* list){
+int occurrence(void *value, LinkedList *list){
     int count = 0, i;
     Element* elem = list->head;
     for (i = 0; i< list->size; i++){
@@ -281,7 +272,7 @@ int occurence(void* value, LinkedList* list){
 }
 
 /**
- *
+ * @brief concat of a list with another
  * @param list1 the list in which we will add the secund list
  * @param list2 the list we will add to the first
  * @return la concatenaton of the two list
@@ -300,12 +291,12 @@ LinkedList* concatenationLinkedList(LinkedList* list1, LinkedList* list2){
 }
 
 /**
- *
+ * @brief remove an element due to the value
  * @param value the value we want to remove (the first)
  * @param list the list in which we want to remove
  * @return the list without the value
  */
-LinkedList* removeByValue(void* value, LinkedList* list) {
+LinkedList* removeValue(void *value, LinkedList *list) {
     if (!isEmpty(list)) {
         Element *elem = list->head;
         while (elem != NULL && elem->value != value) {

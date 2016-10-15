@@ -10,13 +10,12 @@
 #include <Pokemon.h>
 #include <NatureType.h>
 
-
 /**
  *
  * @param type the Pokemon type we want to create
  * @return the linkedList of weakness
  */
-NatureType* typeInitialisation(NatureType* type){
+NatureType* initialisationType (NatureType* type){
     LinkedList* weakness = malloc(sizeof(LinkedList));
     LinkedList* resistance = malloc(sizeof(LinkedList));
     LinkedList* immunity = malloc(sizeof(LinkedList));
@@ -212,6 +211,8 @@ NatureType* createdType(NatureType* type){
 
             type->immunity = addElementInHead((void *) DRAGON, type->resistance);
             break;
+        case UNDEFINED :
+            /* fall through*/
         default :
             printf("Incorrect Type");
             exit(EXIT_FAILURE);

@@ -41,7 +41,7 @@ typedef struct {
  * @param type the Pokemon type we want to create
  * @return the linkedList of weakness
  */
-NatureType* typeInitialisation(NatureType* type);
+NatureType* initialisationType(NatureType* type);
 
 /**
  * @brief f***ing borring function (array -> code line)

@@ -152,6 +152,21 @@ LinkedList* removeFirstElement(LinkedList *list){
     return list;
 }
 
+/**
+ * @brief copy all the element of a list and add them in another list
+ * @param listDest the list of destination
+ * @param listCopy the list in which we will copy all the elements
+ * @return the list with all the elements
+ */
+LinkedList* addCopyLinkedList(LinkedList* listDest, LinkedList* listCopy){
+    Element* tmp = listCopy->head;
+    for (int i = 0; i < listCopy->size; ++i){
+        listDest = addElementInTail(tmp->value, listDest);
+        tmp = tmp->next;
+    }
+    return listDest;
+}
+
 
 /**
  * @brief remove the last element of a list
@@ -303,9 +318,13 @@ LinkedList* removeValue(void *value, LinkedList *list) {
             elem = elem->next;
         }
         if (elem != NULL) {
-            if (elem->next == NULL) {
+            if (elem->next == NULL && elem->prev != NULL) {
                 elem->prev->next = NULL;
                 list->tail = elem->prev;
+                free(elem);
+            } else if (elem->next == NULL && elem->prev == NULL) {
+                list->head = NULL;
+                list->tail = NULL;
                 free(elem);
             } else if (elem->prev == NULL) {
                 elem->next->prev = NULL;

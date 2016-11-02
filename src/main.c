@@ -10,39 +10,45 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <LinkedList.h>
 #include <NatureType.h>
 #include <Pokemon.h>
 
 int main (){
-    int value = 5, i, value1 = 7, value2 = 9;
-    Element* tmp;
+    int i;
+    NatureType* natureType[NBTYPE];
 
-    LinkedList* list = createLinkedList();
-    list = addElementInHead(&value, list);
-    list = addElementInTail(&value1, list);
-    list = addElementInIndex(&value2, list, 1);
-
-    tmp = list->head;
-    for (i = 0; i < list->size; i++){
-        int* lol = tmp->value;
-        printf("L'element %d est : %d\n", i, *lol);
-        tmp = tmp->next;
-    }
-    if (contains(&value, list)){
-        printf("La valeur cherche est bien presente et elle se trouve à l'index : %d\n", indexValue(&value, list));
-    } else {
-        printf("La valeur n'est pas presente.\n");
+    for(i = 0; i < NBTYPE; ++i){
+        natureType[i] = createNatureType(g_AllType[i]);
     }
 
-    list = addElementInHead((void *) 5, list);
-    list = addElementInTail((void *) 5, list);
-    printf("Nb de fois qu'est present 5 : %d\n", occurrence((void *) 5, list));
-    list = removeValue((void *) 5, list);
-    printf("Nb de fois qu'est present 5 : %d\n", occurrence((void *) 5, list));
-    deleteLinkedList(list);
+    PokemonTeam* pokemonTeam = createEmptyPokemonTeam();
+    Pokemon* pokemon1 = createPokemon("Arakdo", 10,5,6,2,7, natureType[BUG], natureType[FLYING]);
+    Pokemon* pokemon2 = createPokemon("Laggron", 15,6,8,9,15, natureType[WATER], natureType[GROUND]);
+    Pokemon* pokemon3 = createPokemon("Gallame", 20,10,9,8,15, natureType[PSYCHIC], natureType[FIGHTING]);
+    Pokemon* pokemon4 = createPokemon("Gryhena", 20,10,9,8,15, natureType[DARK],NULL);
+    Pokemon* pokemon5 = createPokemon("Insecateur", 20,10,9,8,15, natureType[GRASS], natureType[FIGHTING]);
+    //Pokemon* pokemon6 = createPokemon("Insecateur", 20,10,9,8,15, natureType[BUG], natureType[FLYING]);
+    pokemon1 = calculStatTypePokemon(pokemon1);
+    pokemon2 = calculStatTypePokemon(pokemon2);
+    pokemon3 = calculStatTypePokemon(pokemon3);
+    pokemon4 = calculStatTypePokemon(pokemon4);
+    pokemon5 = calculStatTypePokemon(pokemon5);
+    pokemonTeam->pokemonTeam[0] = pokemon1;
+    pokemonTeam->pokemonTeam[1] = pokemon2;
+    pokemonTeam->pokemonTeam[2] = pokemon3;
+    pokemonTeam->pokemonTeam[3] = pokemon4;
+    pokemonTeam->pokemonTeam[4] = pokemon5;
 
-    if(contains(&value, list) || contains(&value1, list) || contains(&value2, list))
-        printf("la liste n'a pas ete supprime proprement\n");
+    pokemonTeam->size = 5;
+    pokemonTeam = calculStatTypePokemonTeam(pokemonTeam);
+    printCharacteristic(pokemon1);
+    printf("\n");
+    printCharacteristic(pokemon2);
+    printf("\n");
+    printCharacteristic(pokemon3);
+    printf("\n");
+    printf("\n");
+    printStatTypePokemonTeam(pokemonTeam);
+    deletePokemonTeam(pokemonTeam);
     return EXIT_SUCCESS;
 }

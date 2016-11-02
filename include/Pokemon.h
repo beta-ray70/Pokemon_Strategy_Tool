@@ -7,21 +7,19 @@
 
 #include <NatureType.h>
 
-#define NBTYPE 18
 #define NB_POKEMON 6
 #define MAX_TYPE 2
 
-//TypePokemon allTypeArray[NBTYPE] = {PSYCHIC, WATER, FIRE, GRASS, DRAGON, DARK, ELECTRIC, ICE, GHOST, FIGHTING, BUG, GROUND, POISON, ROCK, STEEL, FAIRY, NORMAL, FLYING};
-
 typedef struct {
 
+    char* name;
     int pv;
     int attack;
     int defense;
     int special_attack;
     int special_defense;
     int speed;
-    NatureType type[MAX_TYPE];
+    NatureType* type[MAX_TYPE];
     LinkedList* weakness;
     LinkedList* weaknessX2;
     LinkedList* immunity;
@@ -35,9 +33,35 @@ typedef struct{
     LinkedList* weaknessX2;
     LinkedList* resistanceX2;
     LinkedList* immunity;
-    Pokemon pokemonTeam[NB_POKEMON];
+    Pokemon* pokemonTeam[NB_POKEMON];
     int size;
 }PokemonTeam;
+
+/**
+ * @brief construct an empty Pokemon and initialisation of this data structure (allocation and initialisation)
+ * @return the empty Pokemon
+ */
+Pokemon* createEmptyPokemon();
+
+/**
+ * @brief construct the data type Pokemon
+ * @param name the name of the pokemon
+ * @param attack the attack of the pokemon
+ * @param sattack the attack special of the pokemon
+ * @param defense the defense of the pokemon
+ * @param sdefense the special defense
+ * @param speed the speedness of the pokemon
+ * @param type the types of the pokemon
+ * @return the pokemon created
+ */
+Pokemon* createPokemon(const char* name, int attack, int sattack, int defense, int sdefense,
+                       int speed, NatureType* type, NatureType* type2);
+
+/**
+ * @brief create an empty Pokemon team
+ * @return the empty Pokemon team
+ */
+PokemonTeam* createEmptyPokemonTeam();
 
 /**
  * @brief WARNING SIDE EFFECT : concatenation of weaknessX2 in the same time as weaknessX2
@@ -59,5 +83,43 @@ LinkedList* immunityTeamCalculator(PokemonTeam* team);
  * @return the resistance of the team
  */
 LinkedList* resistanceTeamCalculator(PokemonTeam* team);
+
+/**
+ * @brief calcul the weaknesses, immunities and resistances of the pokemon team
+ * @param pokemonTeam the pokemon team we want to print characteristic
+ * @return the pokemonTeam with weaknesses, immunities and resistances
+ */
+PokemonTeam* calculStatTypePokemonTeam(PokemonTeam* pokemonTeam);
+
+/**
+ * @brief delete a Pokemon
+ * @param pokemon the pokemon we want to delete
+ */
+void deletePokemon(Pokemon* pokemon);
+
+/**
+ * @brief delete all the pokemon team
+ * @param pokemonTeam the pokemon team we want to delete
+ */
+void deletePokemonTeam(PokemonTeam* pokemonTeam);
+
+/**
+ * @brief print all the characteristic of a pokemon
+ * @param pokemon the pokemon we want to print characteristic
+ */
+void printCharacteristic(Pokemon* pokemon);
+
+/**
+ * @brief calcul weakness, immunity and resistance of a pokemon
+ * @param pokemon the pokemon we want to calculate weakness, immunity and resistance
+ * @return the pokemon
+ */
+Pokemon* calculStatTypePokemon(Pokemon* pokemon);
+
+/**
+ * @brief print all the weaknesses, the immunities and the resistances of the team
+ * @param pokemonTeam the team we want to print characteristic
+ */
+void printStatTypePokemonTeam(PokemonTeam* pokemonTeam);
 
 #endif //POKÉMON_STRATEGY_TOOLS_POKÉMON_H

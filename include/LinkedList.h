@@ -59,6 +59,14 @@ LinkedList* addElementInTail (void* value, LinkedList* list);
 LinkedList* addElementInIndex (void* value, LinkedList* list, int index);
 
 /**
+ * @brief copy all the element of a list and add them in another list
+ * @param listDest the list of destination
+ * @param listCopy the list in which we will copy all the elements
+ * @return the list with all the elements
+ */
+LinkedList* addCopyLinkedList(LinkedList* listDest, LinkedList* listCopy);
+
+/**
  * @brief remove the first element of a list
  * @param list the list in which we want to remove the first element
  * @return the list without the first element

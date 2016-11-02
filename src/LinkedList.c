@@ -32,7 +32,6 @@ LinkedList* createLinkedList(){
  * @param list the list we want to verify if it's empty or not
  * @return true if it's empty, false else
  */
-
 int isEmpty(LinkedList* list){
     return list == NULL || list->size == 0;
 }
